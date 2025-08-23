@@ -219,7 +219,7 @@ export default function Portfolio() {
                   <Button className="hover-button bg-blue-600 hover:bg-blue-700 rounded-full" asChild>
                     <a href={project.github} target="_blank" rel="noopener noreferrer">
                       <Github className="w-4 h-4 mr-2" />
-                      Ver en GitHub
+                      {project.title === "WikiDev" ? "Ver" : "Ver en GitHub"}
                     </a>
                   </Button>
                 </CardContent>
