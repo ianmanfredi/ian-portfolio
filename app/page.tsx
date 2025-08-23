@@ -170,32 +170,34 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <section className="py-20 px-4">
-  <div className="max-w-4xl mx-auto">
-    <h2 className="font-heading text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll text-white">
-      Certificaciones
-    </h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-      {certifications.map((cert, index) => (
-        <Card
-          key={cert.name}
-          className="portfolio-card text-center animate-on-scroll"
-          style={{ animationDelay: `${index * 0.1}s` }}
-        >
-          <CardContent className="pt-8 pb-8 flex flex-col items-center">
-            <img
-              src={cert.image}
-              alt={cert.name}
-              className="w-64 h-64 object-contain mb-6 rounded-lg border-2 border-blue-600 bg-gray-900 shadow-lg"
-              style={{ maxWidth: '100%', maxHeight: '350px' }}
-            />
-            <p className="text-xl font-semibold text-white mt-2">{cert.name}</p>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </div>
-</section>
+      <section className="py-20 px-4 bg-[#181B20]">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-16 animate-on-scroll text-white">
+            Certificaciones
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {certifications.map((cert, index) => (
+              <Card
+                key={cert.name}
+                className="portfolio-card text-center animate-on-scroll transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-[#23262B] border-0"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardContent className="pt-8 pb-8 flex flex-col items-center">
+                  <div className="w-full aspect-video bg-gray-900 rounded-xl overflow-hidden flex items-center justify-center border-2 border-blue-600 shadow-lg mb-6">
+                    <img
+                      src={cert.image}
+                      alt={cert.name}
+                      className="object-cover w-full h-full"
+                      style={{ maxHeight: '220px' }}
+                    />
+                  </div>
+                  <p className="text-xl font-bold text-white mt-2">{cert.name}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
