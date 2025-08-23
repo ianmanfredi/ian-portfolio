@@ -120,7 +120,7 @@ export default function Portfolio() {
               className="hover-button bg-blue-600 hover:bg-blue-700 rounded-full px-8 py-3 text-lg font-semibold"
               asChild
             >
-              <a href="mailto:ian.manfredi12@gmail.com">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ian.manfredi12@gmail.com" target="_blank" rel="noopener noreferrer">
                 <Mail className="w-5 h-5 mr-2" />
                 Email
               </a>
@@ -240,7 +240,7 @@ export default function Portfolio() {
               className="hover-button bg-blue-600 hover:bg-blue-700 rounded-full px-8 py-3 text-lg font-semibold"
               asChild
             >
-              <a href="mailto:ian.manfredi12@gmail.com">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ian.manfredi12@gmail.com" target="_blank" rel="noopener noreferrer">
                 <Mail className="w-5 h-5 mr-2" />
                 Enviar Email
               </a>
