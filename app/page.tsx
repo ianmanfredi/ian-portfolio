@@ -44,7 +44,7 @@ export default function Portfolio() {
     },
     {
       icon: <Search className="w-6 h-6" />,
-      text: "🔍 Análisis de Datos (Santander)",
+      text: "🔍 Python (Santander)",
     },
     {
       icon: <Puzzle className="w-6 h-6" />,
@@ -53,19 +53,19 @@ export default function Portfolio() {
   ]
 
   const certifications = [
-  {
-    name: "Ciencia de Datos",
-    image: "/certificaciones/ciencia-datos.jpg", // pon aquí tu imagen
-  },
-  {
-    name: "Análisis de Datos",
-    image: "/certificaciones/analisis-datos.jpg", // pon aquí tu imagen
-  },
-  {
-    name: "Resolución de Problemas",
-    image: "/certificaciones/resolucion-problemas.jpg", // pon aquí tu imagen
-  },
-]
+    {
+      name: "Ciencia de Datos",
+      image: "/certificaciones/ciencia-datos.jpg",
+    },
+    {
+      name: "Python",
+      image: "/certificaciones/analisis-datos.jpg",
+    },
+    {
+      name: "Resolución de Problemas",
+      image: "/certificaciones/resolucion-problemas.jpg",
+    },
+  ]
 
   const projects = [
     {
@@ -141,7 +141,7 @@ export default function Portfolio() {
                 bases de datos (SQL/NoSQL).
               </p>
               <p>
-                📜 <strong className="text-white">Certificado</strong> en Ciencia de Datos, Análisis de Datos y
+                📜 <strong className="text-white">Certificado</strong> en Ciencia de Datos, Python y
                 Resolución de Problemas.
               </p>
               <p>
@@ -177,26 +177,24 @@ export default function Portfolio() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {certifications.map((cert, index) => (
-  <Card
-    key={cert.name}
-    className="portfolio-card text-center animate-on-scroll"
-    style={{ animationDelay: `${index * 0.1}s` }}
-  >
-    <CardContent className="pt-8 pb-8">
-      <div className="w-full h-32 bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-        <img
-          src={cert.image}
-          alt={`Certificación ${cert.name}`}
-          className="object-contain h-28 max-h-full mx-auto"
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = 'none';
-          }}
-        />
-      </div>
-      <p className="text-lg font-medium text-white">{cert.name}</p>
-    </CardContent>
-  </Card>
-))
+              <Card
+                key={cert.name}
+                className="portfolio-card text-center animate-on-scroll"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardContent className="pt-8 pb-8">
+                  <div className="w-full h-32 bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
+                    {/* Imagen alternativa si no existe la certificación */}
+                    <div className="text-4xl">
+                      {cert.name.includes("Ciencia") && "📊"}
+                      {cert.name.includes("Python") && "🐍"}
+                      {cert.name.includes("Resolución") && "🧩"}
+                    </div>
+                  </div>
+                  <p className="text-lg font-medium text-white">{cert.name}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -242,7 +240,7 @@ export default function Portfolio() {
               className="hover-button bg-blue-600 hover:bg-blue-700 rounded-full px-8 py-3 text-lg font-semibold"
               asChild
             >
-              <a href="mailto:ian.manfredi@example.com">
+              <a href="mailto:ian.manfredi12@gmail.com">
                 <Mail className="w-5 h-5 mr-2" />
                 Enviar Email
               </a>
