@@ -171,33 +171,31 @@ export default function Portfolio() {
       </section>
 
       <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll text-white">
-            Certificaciones
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <Card
-                key={cert.name}
-                className="portfolio-card text-center animate-on-scroll"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="pt-8 pb-8">
-                  <div className="w-full h-32 bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-                    {/* Imagen alternativa si no existe la certificación */}
-                    <div className="text-4xl">
-                      {cert.name.includes("Ciencia") && "📊"}
-                      {cert.name.includes("Python") && "🐍"}
-                      {cert.name.includes("Resolución") && "🧩"}
-                    </div>
-                  </div>
-                  <p className="text-lg font-medium text-white">{cert.name}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+  <div className="max-w-4xl mx-auto">
+    <h2 className="font-heading text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll text-white">
+      Certificaciones
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+      {certifications.map((cert, index) => (
+        <Card
+          key={cert.name}
+          className="portfolio-card text-center animate-on-scroll"
+          style={{ animationDelay: `${index * 0.1}s` }}
+        >
+          <CardContent className="pt-8 pb-8 flex flex-col items-center">
+            <img
+              src={cert.image}
+              alt={cert.name}
+              className="w-64 h-64 object-contain mb-6 rounded-lg border-2 border-blue-600 bg-gray-900 shadow-lg"
+              style={{ maxWidth: '100%', maxHeight: '350px' }}
+            />
+            <p className="text-xl font-semibold text-white mt-2">{cert.name}</p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
 
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
@@ -269,21 +267,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <section className="py-12 px-4" id="certificaciones">
-        <h2 className="text-3xl font-bold mb-8 text-center">Certificaciones</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {certifications.map((cert, idx) => (
-            <div key={idx} className="bg-gray-900 rounded-lg shadow-lg p-6 flex flex-col items-center">
-              <img
-                src={cert.image}
-                alt={cert.name}
-                className="w-28 h-28 object-contain mb-4 rounded"
-              />
-              <h3 className="text-xl font-semibold mb-2">{cert.name}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
       <footer className="py-8 px-4 border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
