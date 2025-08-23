@@ -40,7 +40,7 @@ export default function Portfolio() {
   const aboutPoints = [
     {
       icon: <BarChart3 className="w-6 h-6" />,
-      text: "📊 Certificado en Ciencia de Datos",
+      text: "📊 Certificado en Ciencia de Datos (Santander)",
     },
     {
       icon: <Search className="w-6 h-6" />,
@@ -48,23 +48,36 @@ export default function Portfolio() {
     },
     {
       icon: <Puzzle className="w-6 h-6" />,
-      text: "🧩 Resolución de Problemas",
+      text: "🧩 Resolución de Problemas (Santander)",
     },
   ]
 
-  const certifications = ["Ciencia de Datos", "Análisis de Datos", "Resolución de Problemas"]
+  const certifications = [
+  {
+    name: "Ciencia de Datos",
+    image: "/certificaciones/ciencia-datos.jpg", // pon aquí tu imagen
+  },
+  {
+    name: "Análisis de Datos",
+    image: "/certificaciones/analisis-datos.jpg", // pon aquí tu imagen
+  },
+  {
+    name: "Resolución de Problemas",
+    image: "/certificaciones/resolucion-problemas.jpg", // pon aquí tu imagen
+  },
+]
 
   const projects = [
     {
       id: 1,
-      title: "Portfolio v1",
-      description: "Tecnologías: React, Vite, CSS",
-      github: "https://github.com/ianmanfredi",
+      title: "WikiDev",
+      description: "Tecnologías: HTML, CSS, JavaScript",
+      github: "https://wikidev-theta.vercel.app/index.html",
     },
     {
       id: 2,
-      title: "E-commerce App",
-      description: "Tecnologías: React, Node.js, MongoDB",
+      title: "Proyecto 2",
+      description: "En proceso...",
       github: "https://github.com/ianmanfredi",
     },
   ]
@@ -107,7 +120,7 @@ export default function Portfolio() {
               className="hover-button bg-blue-600 hover:bg-blue-700 rounded-full px-8 py-3 text-lg font-semibold"
               asChild
             >
-              <a href="mailto:ian.manfredi@example.com">
+              <a href="mailto:ian.manfredi12@gmail.com">
                 <Mail className="w-5 h-5 mr-2" />
                 Email
               </a>
@@ -164,19 +177,26 @@ export default function Portfolio() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {certifications.map((cert, index) => (
-              <Card
-                key={cert}
-                className="portfolio-card text-center animate-on-scroll"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="pt-8 pb-8">
-                  <div className="w-full h-32 bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-                    <span className="text-gray-500 text-sm">Imagen de certificación</span>
-                  </div>
-                  <p className="text-lg font-medium text-white">{cert}</p>
-                </CardContent>
-              </Card>
-            ))}
+  <Card
+    key={cert.name}
+    className="portfolio-card text-center animate-on-scroll"
+    style={{ animationDelay: `${index * 0.1}s` }}
+  >
+    <CardContent className="pt-8 pb-8">
+      <div className="w-full h-32 bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
+        <img
+          src={cert.image}
+          alt={`Certificación ${cert.name}`}
+          className="object-contain h-28 max-h-full mx-auto"
+          onError={(e) => {
+            (e.target as HTMLImageElement).style.display = 'none';
+          }}
+        />
+      </div>
+      <p className="text-lg font-medium text-white">{cert.name}</p>
+    </CardContent>
+  </Card>
+))
           </div>
         </div>
       </section>
