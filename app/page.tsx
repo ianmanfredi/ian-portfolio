@@ -269,6 +269,22 @@ export default function Portfolio() {
         </div>
       </section>
 
+      <section className="py-12 px-4" id="certificaciones">
+        <h2 className="text-3xl font-bold mb-8 text-center">Certificaciones</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {certifications.map((cert, idx) => (
+            <div key={idx} className="bg-gray-900 rounded-lg shadow-lg p-6 flex flex-col items-center">
+              <img
+                src={cert.image}
+                alt={cert.name}
+                className="w-28 h-28 object-contain mb-4 rounded"
+              />
+              <h3 className="text-xl font-semibold mb-2">{cert.name}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <footer className="py-8 px-4 border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-gray-400">© 2025 Ian Manfredi </p>
