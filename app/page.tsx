@@ -3,11 +3,10 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail, BarChart3, Search, Puzzle } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 
 export default function Portfolio() {
   const [isVisible, setIsVisible] = useState(false)
-  const [activeTab, setActiveTab] = useState("lenguajes")
 
   useEffect(() => {
     setIsVisible(true)
@@ -32,25 +31,11 @@ export default function Portfolio() {
   }, [])
 
   const skills = {
-    lenguajes: ["JavaScript", "Python", "Bash"],
-    frameworks: ["React", "React Native", "Node.js", "Express", "Flask"],
-    basesDeDatos: ["MySQL", "MongoDB", "Neo4j", "AWS", "PyMongo"],
+    lenguajesYWeb: ["HTML", "CSS", "JavaScript", "Python"],
+    frameworksYLibrerias: ["Flask", "Django", "jQuery", "React-React Native", "Node.js", "Express"],
+    basesDeDatos: ["MySQL", "MongoDB", "PyMongo", "Neo4j"],
+    herramientasYPlataformas: ["Eslint", "EJS y Pug", "Git", "Github y Gitlab", "Google cloud", "AWS"],
   }
-
-  const aboutPoints = [
-    {
-      icon: <BarChart3 className="w-6 h-6" />,
-      text: "📊 Certificado en Ciencia de Datos (Santander)",
-    },
-    {
-      icon: <Search className="w-6 h-6" />,
-      text: "🔍 Python (Santander)",
-    },
-    {
-      icon: <Puzzle className="w-6 h-6" />,
-      text: "🧩 Resolución de Problemas (Santander)",
-    },
-  ]
 
   const certifications = [
     {
@@ -167,18 +152,15 @@ export default function Portfolio() {
                   📜 <strong className="text-white">Certificado</strong> en Ciencia de Datos, Python y
                   Resolución de Problemas.
                 </p>
-                <p>
-                  🛠️ <strong className="text-white">Herramientas</strong>: Git, Postman, Google Colab, AWS etc.
-                </p>
               </div>
               {/* Skills Section */}
               <div className="mt-10 animate-on-scroll">
                 <h3 className="text-2xl font-bold text-white mb-4 text-center">Skills</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <div>
-                    <h4 className="text-xl font-semibold text-blue-400 mb-2 text-center">Lenguajes</h4>
+                    <h4 className="text-xl font-semibold text-blue-400 mb-2 text-center">Lenguajes y Tecnologías Web</h4>
                     <div className="flex flex-wrap justify-center gap-2">
-                      {skills.lenguajes.map((skill) => (
+                      {skills.lenguajesYWeb.map((skill) => (
                         <span key={skill} className="bg-blue-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
                           {skill}
                         </span>
@@ -186,9 +168,9 @@ export default function Portfolio() {
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-green-400 mb-2 text-center">Frameworks</h4>
+                    <h4 className="text-xl font-semibold text-green-400 mb-2 text-center">Frameworks y Librerías</h4>
                     <div className="flex flex-wrap justify-center gap-2">
-                      {skills.frameworks.map((skill) => (
+                      {skills.frameworksYLibrerias.map((skill) => (
                         <span key={skill} className="bg-green-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
                           {skill}
                         </span>
@@ -205,12 +187,22 @@ export default function Portfolio() {
                       ))}
                     </div>
                   </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-purple-400 mb-2 text-center">Herramientas y Plataformas</h4>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {skills.herramientasYPlataformas.map((skill) => (
+                        <span key={skill} className="bg-purple-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        
+
         {/* Educación Section */}
         <section className="py-20 px-4" id="educacion">
           <div className="max-w-4xl mx-auto">
@@ -229,7 +221,7 @@ export default function Portfolio() {
             </Card>
           </div>
         </section>
-        
+
         {/* Certificaciones Section */}
         <section className="py-20 px-4 bg-[#181B20]" id="certificaciones">
           <div className="max-w-6xl mx-auto">
@@ -259,7 +251,7 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-        
+
         {/* Proyectos Section */}
         <section className="py-20 px-4" id="proyectos">
           <div className="max-w-6xl mx-auto">
@@ -294,7 +286,7 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-        
+
         {/* Contacto Section */}
         <section className="py-20 px-4" id="contacto">
           <div className="max-w-2xl mx-auto text-center">
@@ -334,7 +326,7 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
-        
+
         {/* Footer */}
         <footer className="py-8 px-4 border-t border-gray-800">
           <div className="max-w-4xl mx-auto text-center">
