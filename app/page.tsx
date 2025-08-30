@@ -115,7 +115,7 @@ export default function Portfolio() {
             </h1>
             <h2 className="text-2xl md:text-3xl mb-6 font-semibold text-white">Full Stack Developer</h2>
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed text-gray-300">
-              Especializado en JavaScript, Python y base de datos.
+ 
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Button
@@ -497,12 +497,16 @@ export default function Portfolio() {
                   <CardDescription className="text-gray-300">{project.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button className="hover-button bg-blue-600 hover:bg-blue-700 rounded-full" asChild>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="w-4 h-4 mr-2" />
-                      {project.title === "WikiDev" ? "Ver" : "Ver en GitHub"}
-                    </a>
-                  </Button>
+                  {project.github ? (
+  <Button className="hover-button bg-blue-600 hover:bg-blue-700 rounded-full" asChild>
+    <a href={project.github} target="_blank" rel="noopener noreferrer">
+      <Github className="w-4 h-4 mr-2" />
+      {project.title === "WikiDev" ? "Ver" : "Ver en GitHub"}
+    </a>
+  </Button>
+) : (
+  <span className="inline-block px-4 py-2 bg-gray-700 text-gray-300 rounded-full text-sm">En proceso</span>
+) }
                 </CardContent>
               </Card>
             ))}
