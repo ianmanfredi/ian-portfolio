@@ -239,58 +239,60 @@ export default function Portfolio() {
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll gradient-text">
               Sobre Mi & Skills
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start animate-on-scroll">
-              <div className="p-6">
-                <div className="text-lg md:text-xl leading-relaxed text-gray-300 space-y-6">
-                  <p>
-                    Soy un programador Full Stack con experiencia en JavaScript y Python. Me dedico al desarrollo web y conozco bases de datos, tanto SQL como NoSQL.
-                  </p>
-                  <p>
-                    Siempre busco aprender y aplicar nuevas tecnologias para resolver problemas, asi que me mantengo estudiando para estar al dia.
-                  </p>
+            <div className="portfolio-card glassmorphism animate-on-scroll p-6 md:p-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <div>
+                  <div className="text-lg md:text-xl leading-relaxed text-gray-300 space-y-6">
+                    <p>
+                      Soy un programador Full Stack con experiencia en JavaScript y Python. Me dedico al desarrollo web y conozco bases de datos, tanto SQL como NoSQL.
+                    </p>
+                    <p>
+                      Siempre busco aprender y aplicar nuevas tecnologias para resolver problemas, asi que me mantengo estudiando para estar al dia.
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="animate-on-scroll p-6">
-                <h3 className="text-2xl font-bold text-white mb-6">Habilidades Tecnicas</h3>
-                <div className="space-y-8">
-                  <div>
-                    <h4 className="text-xl font-semibold text-gray-200 mb-4">Lenguajes y Tecnologias Web</h4>
-                    <div className="flex flex-wrap gap-3">
-                      {skills.lenguajesYWeb.map((skill) => (
-                        <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
-                          {skill}
-                        </span>
-                      ))}
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-6">Habilidades Tecnicas</h3>
+                  <div className="space-y-8">
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-200 mb-4">Lenguajes y Tecnologias Web</h4>
+                      <div className="flex flex-wrap gap-3">
+                        {skills.lenguajesYWeb.map((skill) => (
+                          <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-gray-200 mb-4">Frameworks y Librerias</h4>
-                    <div className="flex flex-wrap gap-3">
-                      {skills.frameworksYLibrerias.map((skill) => (
-                        <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
-                          {skill}
-                        </span>
-                      ))}
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-200 mb-4">Frameworks y Librerias</h4>
+                      <div className="flex flex-wrap gap-3">
+                        {skills.frameworksYLibrerias.map((skill) => (
+                          <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-gray-200 mb-4">Bases de Datos</h4>
-                    <div className="flex flex-wrap gap-3">
-                      {skills.basesDeDatos.map((skill) => (
-                        <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
-                          {skill}
-                        </span>
-                      ))}
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-200 mb-4">Bases de Datos</h4>
+                      <div className="flex flex-wrap gap-3">
+                        {skills.basesDeDatos.map((skill) => (
+                          <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-gray-200 mb-4">Herramientas y Plataformas</h4>
-                    <div className="flex flex-wrap gap-3">
-                      {skills.herramientasYPlataformas.map((skill) => (
-                        <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
-                          {skill}
-                        </span>
-                      ))}
+                    <div>
+                      <h4 className="text-xl font-semibold text-gray-200 mb-4">Herramientas y Plataformas</h4>
+                      <div className="flex flex-wrap gap-3">
+                        {skills.herramientasYPlataformas.map((skill) => (
+                          <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
