@@ -337,12 +337,6 @@ export default function Portfolio() {
     </>
   )
 }
-            Especializado en JavaScript, Python y base de datos.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Button
-              size="lg"
-              className="hover-button bg-blue-600 hover:bg-blue-700 rounded-full px-8 py-3 text-lg font-semibold"
               asChild
             >
               <a href="https://github.com/ianmanfredi" target="_blank" rel="noopener noreferrer">
