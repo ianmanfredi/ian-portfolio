@@ -243,10 +243,10 @@ export default function Portfolio() {
               <div className="p-6">
                 <div className="text-lg md:text-xl leading-relaxed text-gray-300 space-y-6">
                   <p>
-                    Soy un desarrollador Full Stack con experiencia en JavaScript y Python. Me especializo en la creacion de aplicaciones web y tengo solidos conocimientos de bases de datos, tanto SQL como NoSQL.
+                    Soy un programador Full Stack con experiencia en JavaScript y Python. Me dedico al desarrollo web y conozco bases de datos, tanto SQL como NoSQL.
                   </p>
                   <p>
-                    Siempre busco aprender y aplicar nuevas tecnologias para resolver problemas complejos. Estoy certificado en Ciencia de Datos y Resolucion de Problemas, lo que demuestra mi compromiso con el crecimiento profesional.
+                    Siempre busco aprender y aplicar nuevas tecnologias para resolver problemas, asi que me mantengo estudiando para estar al dia.
                   </p>
                 </div>
               </div>
