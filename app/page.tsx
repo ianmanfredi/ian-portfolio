@@ -11,14 +11,13 @@ export default function Portfolio() {
   useEffect(() => {
     setIsVisible(true)
 
-    // Smooth scroll functionality
     const handleSmoothScroll = (e) => {
       e.preventDefault()
       const targetId = e.currentTarget.getAttribute("href").substring(1)
       const targetElement = document.getElementById(targetId)
       if (targetElement) {
         window.scrollTo({
-          top: targetElement.offsetTop - 80, // Adjust for fixed navbar height
+          top: targetElement.offsetTop - 80,
           behavior: "smooth",
         })
       }
@@ -70,7 +69,7 @@ export default function Portfolio() {
       image: "/certificaciones/analisis-datos.jpg",
     },
     {
-      name: "Resolución de Problemas",
+      name: "Resolucion de Problemas",
       image: "/certificaciones/resolucion-problemas.jpg",
     },
   ]
@@ -79,7 +78,7 @@ export default function Portfolio() {
     {
       id: 1,
       title: "WikiDev",
-      description: "Tecnologías: HTML, CSS, JavaScript",
+      description: "Tecnologias: HTML, CSS, JavaScript",
       github: "https://wikidev-theta.vercel.app/index.html",
     },
     {
@@ -91,7 +90,6 @@ export default function Portfolio() {
 
   return (
     <>
-      {/* Custom CSS for gradients and animations */}
       <style jsx global>{`
         .gradient-text {
           background-image: linear-gradient(45deg, #a78bfa, #60a5fa, #818cf8);
@@ -175,16 +173,15 @@ export default function Portfolio() {
         }
       `}</style>
 
-      {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full z-50 glassmorphism transition-shadow duration-300">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
           <span className="font-bold text-2xl text-white tracking-wider">Ian Manfredi</span>
           <ul className="hidden md:flex items-center space-x-8">
             <li>
-              <a href="#sobre-mi" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Sobre Mí</a>
+              <a href="#sobre-mi" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Sobre Mi</a>
             </li>
             <li>
-              <a href="#educacion" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Educación</a>
+              <a href="#educacion" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Educacion</a>
             </li>
             <li>
               <a href="#certificaciones" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Certificaciones</a>
@@ -204,7 +201,6 @@ export default function Portfolio() {
       </nav>
 
       <div className="pt-20 min-h-screen bg-[#0d1117] text-white font-sans scroll-smooth">
-        {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-[#0d1117]" id="hero">
           <div className={`text-center max-w-4xl mx-auto ${isVisible ? "fade-in-up" : "opacity-0"}`}>
             <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 tracking-tight gradient-text">
@@ -238,38 +234,27 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Sobre Mí Section */}
         <section className="py-20 px-4 bg-diagonal-gradient" id="sobre-mi">
           <div className="max-w-6xl mx-auto">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll gradient-text">
-              Sobre Mí & Skills
+              Sobre Mi & Skills
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start animate-on-scroll">
               <div className="p-6">
                 <div className="text-lg md:text-xl leading-relaxed text-gray-300 space-y-6">
                   <p>
-                    🚀 Soy un <strong className="text-white">Desarrollador Full Stack</strong> apasionado,
-                    especializado en la creación de aplicaciones web dinámicas y escalables.
-                    Mi experiencia se centra en tecnologías como JavaScript y Python,
-                    y tengo un sólido conocimiento de bases de datos tanto relacionales
-                    (SQL) como no relacionales (NoSQL).
+                    Soy un desarrollador Full Stack con experiencia en JavaScript y Python. Me especializo en la creacion de aplicaciones web y tengo solidos conocimientos de bases de datos, tanto SQL como NoSQL.
                   </p>
                   <p>
-                    📚 Constantemente busco aprender y aplicar nuevas tecnologías para
-                    resolver problemas complejos y construir soluciones eficientes.
-                    Estoy certificado en áreas como <strong className="text-white">Ciencia de Datos</strong>,
-                    <strong className="text-white"> Python</strong> y
-                    <strong className="text-white"> Resolución de Problemas</strong>, lo que demuestra mi
-                    compromiso con el crecimiento profesional continuo.
+                    Siempre busco aprender y aplicar nuevas tecnologias para resolver problemas complejos. Estoy certificado en Ciencia de Datos y Resolucion de Problemas, lo que demuestra mi compromiso con el crecimiento profesional.
                   </p>
                 </div>
               </div>
-              {/* Skills Section */}
               <div className="animate-on-scroll p-6">
-                <h3 className="text-2xl font-bold text-white mb-6">Habilidades Técnicas</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">Habilidades Tecnicas</h3>
                 <div className="space-y-8">
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-200 mb-4">Lenguajes y Tecnologías Web</h4>
+                    <h4 className="text-xl font-semibold text-gray-200 mb-4">Lenguajes y Tecnologias Web</h4>
                     <div className="flex flex-wrap gap-3">
                       {skills.lenguajesYWeb.map((skill) => (
                         <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
@@ -279,7 +264,7 @@ export default function Portfolio() {
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-200 mb-4">Frameworks y Librerías</h4>
+                    <h4 className="text-xl font-semibold text-gray-200 mb-4">Frameworks y Librerias</h4>
                     <div className="flex flex-wrap gap-3">
                       {skills.frameworksYLibrerias.map((skill) => (
                         <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
@@ -314,18 +299,17 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Educación Section */}
         <section className="py-20 px-4" id="educacion">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll gradient-text">
-              Educación
+              Educacion
             </h2>
             <Card className="portfolio-card glassmorphism animate-on-scroll">
               <CardHeader>
                 <div className="text-center">
-                  <CardTitle className="text-2xl text-white mb-2">Técnico Superior en Programación</CardTitle>
+                  <CardTitle className="text-2xl text-white mb-2">Tecnico Superior en Programacion</CardTitle>
                   <CardDescription className="text-xl text-gray-300">
-                    UTN Bahía Blanca | Carrera orientada a desarrollo web
+                    UTN Bahia Blanca | Carrera orientada a desarrollo web
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -333,7 +317,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Certificaciones Section */}
         <section className="py-20 px-4 bg-[#181B20]" id="certificaciones">
           <div className="max-w-6xl mx-auto">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-16 animate-on-scroll gradient-text">
@@ -363,7 +346,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Proyectos Section */}
         <section className="py-20 px-4" id="proyectos">
           <div className="max-w-6xl mx-auto">
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-16 animate-on-scroll gradient-text">
@@ -398,11 +380,10 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Contacto Section */}
         <section className="py-20 px-4" id="contacto">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-8 animate-on-scroll gradient-text">Contacto</h2>
-            <p className="text-lg mb-12 text-gray-300 animate-on-scroll">¿Interesado en trabajar juntos? ¡Contáctame!</p>
+            <p className="text-lg mb-12 text-gray-300 animate-on-scroll">¿Interesado en trabajar juntos? ¡Contactame!</p>
             <div className="flex flex-wrap justify-center gap-6 animate-on-scroll">
               <Button
                 size="lg"
@@ -438,7 +419,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Footer */}
         <footer className="py-8 px-4 border-t border-gray-800">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-gray-400">© 2025 Ian Manfredi</p>
