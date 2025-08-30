@@ -11,6 +11,24 @@ export default function Portfolio() {
   useEffect(() => {
     setIsVisible(true)
 
+    // Smooth scroll functionality
+    const handleSmoothScroll = (e) => {
+      e.preventDefault()
+      const targetId = e.currentTarget.getAttribute("href").substring(1)
+      const targetElement = document.getElementById(targetId)
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80, // Adjust for fixed navbar height
+          behavior: "smooth",
+        })
+      }
+    }
+
+    const navLinks = document.querySelectorAll("nav ul a")
+    navLinks.forEach((link) => {
+      link.addEventListener("click", handleSmoothScroll)
+    })
+
     const observerOptions = {
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px",
@@ -27,7 +45,12 @@ export default function Portfolio() {
     const animatedElements = document.querySelectorAll(".animate-on-scroll")
     animatedElements.forEach((el) => observer.observe(el))
 
-    return () => observer.disconnect()
+    return () => {
+      navLinks.forEach((link) => {
+        link.removeEventListener("click", handleSmoothScroll)
+      })
+      observer.disconnect()
+    }
   }, [])
 
   const skills = {
@@ -69,10 +92,10 @@ export default function Portfolio() {
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-[#181B20] bg-opacity-95 shadow-md border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-[#181B20] bg-opacity-95 shadow-md border-b border-gray-800 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
           <span className="font-bold text-xl text-white tracking-tight">Ian Manfredi</span>
-          <ul className="flex space-x-4 md:space-x-8">
+          <ul className="hidden md:flex space-x-8">
             <li>
               <a href="#sobre-mi" className="text-gray-300 hover:text-blue-400 font-medium transition-colors duration-200">Sobre Mí</a>
             </li>
@@ -91,7 +114,8 @@ export default function Portfolio() {
           </ul>
         </div>
       </nav>
-      <div className="pt-20 min-h-screen bg-[#0d1117] text-white font-sans scroll-smooth">
+
+      <div className="pt-20 min-h-screen bg-[#0d1117] text-white font-sans">
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center px-4 py-20" id="hero">
           <div className={`text-center max-w-4xl mx-auto ${isVisible ? "fade-in-up" : "opacity-0"}`}>
@@ -157,46 +181,54 @@ export default function Portfolio() {
               <div className="mt-10 animate-on-scroll">
                 <h3 className="text-2xl font-bold text-white mb-4 text-center">Skills</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div>
-                    <h4 className="text-xl font-semibold text-blue-400 mb-2 text-center">Lenguajes y Tecnologías Web</h4>
-                    <div className="flex flex-wrap justify-center gap-2">
+                  <Card className="portfolio-card">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-center text-white">Lenguajes y Tecnologías Web</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex flex-wrap justify-center gap-2">
                       {skills.lenguajesYWeb.map((skill) => (
-                        <span key={skill} className="bg-blue-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
+                        <span key={skill} className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
                           {skill}
                         </span>
                       ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-green-400 mb-2 text-center">Frameworks y Librerías</h4>
-                    <div className="flex flex-wrap justify-center gap-2">
+                    </CardContent>
+                  </Card>
+                  <Card className="portfolio-card">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-center text-white">Frameworks y Librerías</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex flex-wrap justify-center gap-2">
                       {skills.frameworksYLibrerias.map((skill) => (
-                        <span key={skill} className="bg-green-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
+                        <span key={skill} className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
                           {skill}
                         </span>
                       ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-yellow-400 mb-2 text-center">Bases de Datos</h4>
-                    <div className="flex flex-wrap justify-center gap-2">
+                    </CardContent>
+                  </Card>
+                  <Card className="portfolio-card">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-center text-white">Bases de Datos</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex flex-wrap justify-center gap-2">
                       {skills.basesDeDatos.map((skill) => (
-                        <span key={skill} className="bg-yellow-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
+                        <span key={skill} className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
                           {skill}
                         </span>
                       ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-purple-400 mb-2 text-center">Herramientas y Plataformas</h4>
-                    <div className="flex flex-wrap justify-center gap-2">
+                    </CardContent>
+                  </Card>
+                  <Card className="portfolio-card">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-center text-white">Herramientas y Plataformas</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex flex-wrap justify-center gap-2">
                       {skills.herramientasYPlataformas.map((skill) => (
-                        <span key={skill} className="bg-purple-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
+                        <span key={skill} className="bg-gray-700 text-white px-3 py-1 rounded-full text-sm font-medium shadow-md">
                           {skill}
                         </span>
                       ))}
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             </div>
