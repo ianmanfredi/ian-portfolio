@@ -92,7 +92,7 @@ export default function Portfolio() {
     <>
       <style jsx global>{`
         .gradient-text {
-          background-image: linear-gradient(45deg, #a78bfa, #60a5fa, #818cf8);
+          background-image: linear-gradient(45deg, #18A4E0, #F8B4C1);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -107,7 +107,7 @@ export default function Portfolio() {
           bottom: -2px;
           width: 0;
           height: 2px;
-          background-image: linear-gradient(45deg, #a78bfa, #60a5fa);
+          background-image: linear-gradient(45deg, #18A4E0, #F8B4C1);
           transition: width 0.3s ease-in-out;
         }
         .gradient-link-underline:hover::after {
@@ -115,7 +115,7 @@ export default function Portfolio() {
         }
 
         .gradient-cta-button {
-          background-image: linear-gradient(90deg, #ec4899, #f97316);
+          background-image: linear-gradient(90deg, #F8B4C1, #F4F1EA);
           background-size: 200% 100%;
           transition: background-position 0.5s ease-in-out;
         }
@@ -137,7 +137,7 @@ export default function Portfolio() {
           left: 0;
           width: 100%;
           height: 100%;
-          background-image: linear-gradient(45deg, #a78bfa, #60a5fa, #f472b6, #fb923c);
+          background-image: linear-gradient(45deg, #18A4E0, #F8B4C1);
           opacity: 0;
           transition: opacity 0.3s ease;
           z-index: -1;
@@ -161,11 +161,11 @@ export default function Portfolio() {
         }
 
         .bg-diagonal-gradient {
-          background-image: linear-gradient(135deg, #0d1117 0%, #1a202c 100%);
+          background-image: linear-gradient(135deg, #222D6D 0%, #32448F 100%);
         }
 
         .glassmorphism {
-          background: rgba(30, 36, 45, 0.5);
+          background: rgba(34, 45, 109, 0.5);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           border: 1px solid rgba(49, 57, 68, 0.3);
@@ -200,8 +200,8 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      <div className="pt-20 min-h-screen bg-[#0d1117] text-white font-sans scroll-smooth">
-        <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-[#0d1117]" id="hero">
+      <div className="pt-20 min-h-screen bg-[#222D6D] text-white font-sans scroll-smooth">
+        <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-[#222D6D]" id="hero">
           <div className={`text-center max-w-4xl mx-auto ${isVisible ? "fade-in-up" : "opacity-0"}`}>
             <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 tracking-tight gradient-text">
               Ian Manfredi
