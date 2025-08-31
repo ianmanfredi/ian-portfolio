@@ -92,7 +92,7 @@ export default function Portfolio() {
     <>
       <style jsx global>{`
         .gradient-text {
-          background-image: linear-gradient(45deg, #18A4E0, #F8B4C1);
+          background-image: linear-gradient(45deg, #00FFFF, #00BFFF);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -107,7 +107,7 @@ export default function Portfolio() {
           bottom: -2px;
           width: 0;
           height: 2px;
-          background-image: linear-gradient(45deg, #18A4E0, #F8B4C1);
+          background-image: linear-gradient(45deg, #00FFFF, #00BFFF);
           transition: width 0.3s ease-in-out;
         }
         .gradient-link-underline:hover::after {
@@ -115,7 +115,7 @@ export default function Portfolio() {
         }
 
         .gradient-cta-button {
-          background-image: linear-gradient(90deg, #F8B4C1, #F4F1EA);
+          background-image: linear-gradient(90deg, #FF00FF, #FFA500);
           background-size: 200% 100%;
           transition: background-position 0.5s ease-in-out;
         }
@@ -124,7 +124,7 @@ export default function Portfolio() {
         }
 
         .skill-pill {
-          background: #252a34;
+          background: #33334d;
           transition: background 0.3s ease, transform 0.3s ease;
           position: relative;
           overflow: hidden;
@@ -137,7 +137,7 @@ export default function Portfolio() {
           left: 0;
           width: 100%;
           height: 100%;
-          background-image: linear-gradient(45deg, #18A4E0, #F8B4C1);
+          background-image: linear-gradient(45deg, #00FF00, #00CED1);
           opacity: 0;
           transition: opacity 0.3s ease;
           z-index: -1;
@@ -161,11 +161,11 @@ export default function Portfolio() {
         }
 
         .bg-diagonal-gradient {
-          background-image: linear-gradient(135deg, #222D6D 0%, #32448F 100%);
+          background-image: linear-gradient(135deg, #1A1A2E 0%, #2A2A4A 100%);
         }
 
         .glassmorphism {
-          background: rgba(34, 45, 109, 0.5);
+          background: rgba(26, 26, 46, 0.5);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           border: 1px solid rgba(49, 57, 68, 0.3);
@@ -200,8 +200,8 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      <div className="pt-20 min-h-screen bg-[#222D6D] text-white font-sans scroll-smooth">
-        <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-[#222D6D]" id="hero">
+      <div className="pt-20 min-h-screen bg-[#1A1A2E] text-white font-sans scroll-smooth">
+        <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-[#1A1A2E]" id="hero">
           <div className={`text-center max-w-4xl mx-auto ${isVisible ? "fade-in-up" : "opacity-0"}`}>
             <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 tracking-tight gradient-text">
               Ian Manfredi
