@@ -370,7 +370,7 @@ export default function Portfolio() {
                       <Button className="hover-button bg-gray-200 text-gray-800 hover:bg-gray-300 rounded-full" asChild>
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
                           <Github className="w-4 h-4 mr-2" />
-                          {project.title === "WikiDev" ? "Ver Proyecto" : "Ver en GitHub"}
+                          {project.title === "WikiDev" ? "Ver Proyecto" : "Ver Proyecto"}
                         </a>
                       </Button>
                     ) : (
