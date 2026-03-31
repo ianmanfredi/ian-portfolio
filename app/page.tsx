@@ -56,18 +56,9 @@ export default function Portfolio() {
   }
 
   const certifications = [
-    {
-      name: "Data Science",
-      image: "/certificaciones/ciencia-datos.jpg",
-    },
-    {
-      name: "Python",
-      image: "/certificaciones/analisis-datos.jpg",
-    },
-    {
-      name: "Problem Solving",
-      image: "/certificaciones/resolucion-problemas.jpg",
-    },
+    { name: "Data Science", image: "/certificaciones/ciencia-datos.jpg" },
+    { name: "Python Analysis", image: "/certificaciones/analisis-datos.jpg" },
+    { name: "Problem Solving", image: "/certificaciones/resolucion-problemas.jpg" },
   ]
 
   const projects = [
@@ -93,413 +84,145 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 selection:bg-[#10b981]/30">
+      {/* INYECCIÓN DE ESTILOS DE v0 */}
+      <style jsx global>{`
+        html { scroll-behavior: smooth; }
+        .glass { background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .text-gradient { background: linear-gradient(to bottom right, #fff 30%, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-primary { background: #10b981; color: #000; font-weight: 600; transition: 0.3s; }
+        .btn-primary:hover { background: #34d399; box-shadow: 0 0 25px rgba(16, 185, 129, 0.4); transform: translateY(-2px); }
+        .btn-ghost { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: #10b981; }
+        .bento-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .bento-item:hover { background: rgba(255,255,255,0.04); border-color: rgba(16, 185, 129, 0.4); transform: scale(1.01); }
+        .skill-tag { background: rgba(16, 185, 129, 0.1); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2); padding: 5px 14px; border-radius: 99px; font-size: 0.8rem; font-weight: 500; }
+        .section-divider { height: 1px; background: linear-gradient(to right, transparent, rgba(16, 185, 129, 0.2), transparent); margin: 4rem auto; width: 80%; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .visible { opacity: 1 !important; transform: translateY(0) !important; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in-up { animation: fadeInUp 1s ease-out forwards; }
+        .nav-link { color: #a1a1aa; transition: 0.3s; }
+        .nav-link:hover { color: #fff; }
+        .cert-card { border-radius: 16px; overflow: hidden; background: #161616; border: 1px solid rgba(255,255,255,0.05); }
+      `}</style>
+
       {/* Navigation */}
       <nav className="fixed top-0 left-0 w-full z-50 glass">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="#hero" className="text-lg font-semibold tracking-tight text-foreground">
-            IM<span className="text-primary">.</span>
+          <a href="#hero" className="text-xl font-bold tracking-tighter">
+            IM<span className="text-[#10b981]">.</span>
           </a>
 
-          {/* Desktop Navigation */}
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
-                  className={`nav-link text-sm font-medium transition-colors ${activeSection === link.href.slice(1) ? "text-foreground" : ""
-                    }`}
-                >
+                <a href={link.href} className="nav-link text-sm font-medium">
                   {link.label}
                 </a>
               </li>
             ))}
             <li>
-              <a
-                href="#contact"
-                className="btn-primary px-5 py-2.5 rounded-full text-sm inline-flex items-center gap-2"
-              >
-                Contact
-                <ArrowUpRight className="w-4 h-4" />
+              <a href="#contact" className="btn-primary px-5 py-2.5 rounded-full text-sm inline-flex items-center gap-2">
+                Contact <ArrowUpRight className="w-4 h-4" />
               </a>
             </li>
           </ul>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          <button className="md:hidden p-2 text-zinc-400" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden glass border-t border-border">
-            <ul className="px-6 py-4 space-y-4">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="block text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a
-                  href="#contact"
-                  className="btn-primary px-5 py-2.5 rounded-full text-sm inline-flex items-center gap-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20">
+      <section id="hero" className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+        {/* Fondo decorativo de v0 */}
+        <div className="absolute inset-0 -z-10 bg-[#0a0a0a] [background:radial-gradient(125%_125%_at_50%_10%,#0a0a0a_40%,#10b9811a_100%)]"></div>
+        
         <div className={`text-center max-w-4xl mx-auto ${isVisible ? "fade-in-up" : "opacity-0"}`}>
           <div className="mb-6">
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-[#10b981]/10 text-[#10b981] border border-[#10b981]/20 uppercase tracking-widest">
               Full Stack Developer
             </span>
           </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-12 text-balance">
-            Ian <span className="text-gradient">Manfredi</span>
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 text-gradient">
+            Ian Manfredi
           </h1>
           <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://github.com/ianmanfredi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
-            >
-              <Github className="w-5 h-5" />
-              GitHub
+            <a href="https://github.com/ianmanfredi" target="_blank" className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2">
+              <Github className="w-5 h-5" /> GitHub
             </a>
-            <a
-              href="https://linkedin.com/in/ianmanfredi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
-            >
-              <Linkedin className="w-5 h-5" />
-              LinkedIn
+            <a href="https://linkedin.com/in/ianmanfredi" target="_blank" className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2">
+              <Linkedin className="w-5 h-5" /> LinkedIn
             </a>
           </div>
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="section-divider max-w-4xl mx-auto" />
+      <div className="section-divider" />
 
-      {/* About & Skills Section - Bento Grid */}
-      <section id="about" className="py-24 md:py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-on-scroll">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-              Get to Know Me
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
-              About Me & Skills
-            </h2>
-          </div>
-
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {/* About Card - Large */}
-            <div className="bento-item p-8 md:col-span-2 lg:col-span-2 animate-on-scroll stagger-1">
-              <div className="h-full flex flex-col justify-between">
-                <div>
-                  <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
-                    Bio
-                  </span>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    I am a Full Stack Developer with experience in JavaScript and Python. I specialize in web development and possess strong knowledge of both SQL and NoSQL databases. I am constantly learning and applying new technologies to solve complex problems, keeping my stack modern and up-to-date.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Core Languages Card */}
-            <div className="bento-item p-6 animate-on-scroll stagger-2">
-              <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
-                Core Languages
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {skills.coreLanguages.map((skill) => (
-                  <span key={skill} className="skill-tag">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Frameworks Card */}
-            <div className="bento-item p-6 lg:col-span-2 animate-on-scroll stagger-3">
-              <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
-                Frameworks & Libraries
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {skills.frameworksLibraries.map((skill) => (
-                  <span key={skill} className="skill-tag">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Data Management Card */}
-            <div className="bento-item p-6 animate-on-scroll stagger-4">
-              <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
-                Data Management
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {skills.dataManagement.map((skill) => (
-                  <span key={skill} className="skill-tag">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Tools Card - Full Width */}
-            <div className="bento-item p-6 md:col-span-2 lg:col-span-3 animate-on-scroll">
-              <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
-                Tools & Platforms
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {skills.toolsPlatforms.map((skill) => (
-                  <span key={skill} className="skill-tag">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+      {/* About & Skills */}
+      <section id="about" className="py-24 px-6 max-w-6xl mx-auto">
+        <div className="text-center mb-16 animate-on-scroll">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4">About & Skills</h2>
+          <p className="text-[#10b981] font-mono text-sm uppercase tracking-widest">Technical Stack</p>
         </div>
-      </section>
 
-      {/* Divider */}
-      <div className="section-divider max-w-4xl mx-auto" />
-
-      {/* Education Section */}
-      <section id="experience" className="py-24 md:py-32 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16 animate-on-scroll">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-              Background
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-              Academic Journey
-            </h2>
-          </div>
-
-          <div className="gradient-border p-8 md:p-12 animate-on-scroll">
-            <div className="flex flex-col gap-4">
-              <div>
-                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-2">
-                  Higher Technician in Programming
-                </h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">
-                  Web development oriented degree
-                </p>
-              </div>
-              <div className="pt-4 border-t border-border">
-                <p className="font-medium text-foreground">UTN Bahia Blanca</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="section-divider max-w-4xl mx-auto" />
-
-      {/* Certifications Section */}
-      <section id="certifications" className="py-24 md:py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-on-scroll">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-              Credentials
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-              Credentials & Certifications
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <div
-                key={cert.name}
-                className={`cert-card animate-on-scroll stagger-${index + 1}`}
-              >
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={cert.image}
-                    alt={cert.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="font-semibold text-foreground">{cert.name}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="section-divider max-w-4xl mx-auto" />
-
-      {/* Projects Section */}
-      <section id="projects" className="py-24 md:py-32 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16 animate-on-scroll">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-              Portfolio
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-              Featured Projects
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
-                className={`project-card animate-on-scroll stagger-${index + 1}`}
-              >
-                <div className="p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="text-primary text-xs font-medium tracking-wider uppercase">
-                      Project {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                      aria-label={`View ${project.title}`}
-                    >
-                      <ArrowUpRight className="w-5 h-5" />
-                    </a>
-                  </div>
-                  <h3 className="text-2xl font-semibold text-foreground mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {project.description}
-                  </p>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-ghost px-5 py-2.5 rounded-full text-sm font-medium inline-flex items-center gap-2"
-                  >
-                    View Project
-                    <ArrowUpRight className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Divider */}
-      <div className="section-divider max-w-4xl mx-auto" />
-
-      {/* Contact Section */}
-      <section id="contact" className="py-24 md:py-32 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="animate-on-scroll">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
-              Get in Touch
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
-              Contact
-            </h2>
-            <p className="text-lg text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed">
-              Interested in working together? Let&apos;s connect.
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bento-item p-8 md:col-span-2 animate-on-scroll">
+            <span className="text-[#10b981] text-xs font-bold uppercase tracking-widest block mb-4">Biography</span>
+            <p className="text-lg text-zinc-400 leading-relaxed">
+              I am a Full Stack Developer specialized in JavaScript and Python. I build scalable web applications with clean architecture and performant databases. Constant learner of emerging technologies.
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 animate-on-scroll">
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=ian.manfredi12@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
-            >
-              <Mail className="w-5 h-5" />
-              Send Email
-            </a>
-            <a
-              href="https://linkedin.com/in/ianmanfredi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
-            >
-              <Linkedin className="w-5 h-5" />
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/ianmanfredi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
-            >
-              <Github className="w-5 h-5" />
-              GitHub
-            </a>
+          <div className="bento-item p-8 animate-on-scroll">
+            <span className="text-[#10b981] text-xs font-bold uppercase tracking-widest block mb-4">Core Tech</span>
+            <div className="flex flex-wrap gap-2">
+              {skills.coreLanguages.map(s => <span key={s} className="skill-tag">{s}</span>)}
+            </div>
+          </div>
+
+          <div className="bento-item p-8 md:col-span-3 animate-on-scroll">
+            <span className="text-[#10b981] text-xs font-bold uppercase tracking-widest block mb-4">Frameworks & Tools</span>
+            <div className="flex flex-wrap gap-3">
+              {[...skills.frameworksLibraries, ...skills.toolsPlatforms].map(s => <span key={s} className="skill-tag">{s}</span>)}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-border">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © 2026 Ian Manfredi
-          </p>
-          <div className="flex items-center gap-6">
-            <a
-              href="https://github.com/ianmanfredi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="https://linkedin.com/in/ianmanfredi"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href="mailto:ian.manfredi12@gmail.com"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Email"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
-          </div>
+      <div className="section-divider" />
+
+      {/* Certifications */}
+      <section id="certifications" className="py-24 px-6 max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-16 animate-on-scroll tracking-tighter">Certifications</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {certifications.map((cert) => (
+            <div key={cert.name} className="cert-card animate-on-scroll">
+              <img src={cert.image} alt={cert.name} className="w-full aspect-video object-cover opacity-80 hover:opacity-100 transition-opacity" />
+              <div className="p-6">
+                <h3 className="font-bold text-lg">{cert.name}</h3>
+              </div>
+            </div>
+          ))}
         </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-32 px-6 text-center">
+        <div className="max-w-2xl mx-auto animate-on-scroll bento-item p-12">
+          <h2 className="text-5xl font-black mb-6 tracking-tighter">Ready to work?</h2>
+          <p className="text-zinc-400 mb-10 text-lg">Let's build something amazing together. Reach out via email.</p>
+          <a href="mailto:ian.manfredi12@gmail.com" className="btn-primary px-10 py-4 rounded-full text-lg inline-flex items-center gap-3">
+            <Mail /> Send Message
+          </a>
+        </div>
+      </section>
+
+      <footer className="py-12 border-t border-white/5 text-center text-zinc-500 text-sm">
+        <p>© 2026 Ian Manfredi • Built with Precision</p>
       </footer>
     </div>
   )
