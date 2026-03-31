@@ -1,39 +1,23 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Github, Linkedin, Mail, ArrowUpRight, Menu, X } from "lucide-react"
 
 export default function Portfolio() {
   const [isVisible, setIsVisible] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("hero")
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
     setIsVisible(true)
 
-    const handleSmoothScroll = (e) => {
-      e.preventDefault()
-      const targetId = e.currentTarget.getAttribute("href").substring(1)
-      const targetElement = document.getElementById(targetId)
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 80,
-          behavior: "smooth",
-        })
-      }
-    }
-
-    const navLinks = document.querySelectorAll("nav ul a")
-    navLinks.forEach((link) => {
-      link.addEventListener("click", handleSmoothScroll)
-    })
-
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
+      rootMargin: "0px 0px -100px 0px",
     }
 
-    const observer = new IntersectionObserver((entries) => {
+    observerRef.current = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible")
@@ -42,26 +26,38 @@ export default function Portfolio() {
     }, observerOptions)
 
     const animatedElements = document.querySelectorAll(".animate-on-scroll")
-    animatedElements.forEach((el) => observer.observe(el))
+    animatedElements.forEach((el) => observerRef.current?.observe(el))
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id)
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    const sections = document.querySelectorAll("section[id]")
+    sections.forEach((section) => sectionObserver.observe(section))
 
     return () => {
-      navLinks.forEach((link) => {
-        link.removeEventListener("click", handleSmoothScroll)
-      })
-      observer.disconnect()
+      observerRef.current?.disconnect()
+      sectionObserver.disconnect()
     }
   }, [])
 
   const skills = {
-    lenguajesYWeb: ["HTML", "CSS", "JavaScript", "Python"],
-    frameworksYLibrerias: ["Flask", "Django", "jQuery", "React-React Native", "Node.js", "Express"],
-    basesDeDatos: ["MySQL", "MongoDB", "PyMongo", "Neo4j"],
-    herramientasYPlataformas: ["Eslint", "EJS y Pug", "Git", "Github y Gitlab", "Google cloud", "AWS"],
+    coreLanguages: ["JavaScript ES6+", "Python", "HTML5", "CSS3"],
+    frameworksLibraries: ["React", "Node.js", "Express", "Django", "Flask", "React Native"],
+    dataManagement: ["MySQL", "MongoDB", "Neo4j"],
+    toolsPlatforms: ["Git", "GitHub", "GitLab", "AWS", "GCP"],
   }
 
   const certifications = [
     {
-      name: "Ciencia de Datos",
+      name: "Data Science",
       image: "/certificaciones/ciencia-datos.jpg",
     },
     {
@@ -69,7 +65,7 @@ export default function Portfolio() {
       image: "/certificaciones/analisis-datos.jpg",
     },
     {
-      name: "Resolucion de Problemas",
+      name: "Problem Solving",
       image: "/certificaciones/resolucion-problemas.jpg",
     },
   ]
@@ -78,356 +74,433 @@ export default function Portfolio() {
     {
       id: 1,
       title: "WikiDev",
-      description: "Tecnologias: HTML, CSS, JavaScript",
-      github: "https://wikidev-theta.vercel.app/index.html",
+      description: "A developer-focused wiki platform built using core web technologies.",
+      link: "https://wikidev-theta.vercel.app/index.html",
     },
     {
       id: 2,
       title: "Cinema Comparisons",
-      description: "Una aplicación para comparar películas y sus valoraciones.",
-      github: "https://imdbcomparisons.vercel.app/",
+      description: "An application to search, compare, and rate movies from multiple sources.",
+      link: "https://imdbcomparisons.vercel.app/",
     },
   ]
 
+  const navLinks = [
+    { href: "#about", label: "About Me" },
+    { href: "#experience", label: "Experience" },
+    { href: "#certifications", label: "Certifications" },
+    { href: "#projects", label: "Projects" },
+  ]
+
   return (
-    <>
-      <style jsx global>{`
-        .gradient-text {
-          background-image: linear-gradient(45deg, #00FFFF, #00BFFF);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .gradient-link-underline {
-          position: relative;
-        }
-        .gradient-link-underline::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: -2px;
-          width: 0;
-          height: 2px;
-          background-image: linear-gradient(45deg, #00FFFF, #00BFFF);
-          transition: width 0.3s ease-in-out;
-        }
-        .gradient-link-underline:hover::after {
-          width: 100%;
-        }
-
-        .gradient-cta-button {
-          background-image: linear-gradient(90deg, #FF00FF, #FFA500);
-          background-size: 200% 100%;
-          transition: background-position 0.5s ease-in-out;
-        }
-        .gradient-cta-button:hover {
-          background-position: -100% 0;
-        }
-
-        .skill-pill {
-          background: #33334d;
-          transition: background 0.3s ease, transform 0.3s ease;
-          position: relative;
-          overflow: hidden;
-          z-index: 1;
-        }
-        .skill-pill::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: linear-gradient(45deg, #00FF00, #00CED1);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          z-index: -1;
-        }
-        .skill-pill:hover::before {
-          opacity: 0.8;
-        }
-        .skill-pill:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .animate-on-scroll {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animate-on-scroll.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .bg-diagonal-gradient {
-          background-image: linear-gradient(135deg, #1A1A2E 0%, #2A2A4A 100%);
-        }
-
-        .glassmorphism {
-          background: rgba(26, 26, 46, 0.5);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          border: 1px solid rgba(49, 57, 68, 0.3);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-      `}</style>
-
-      <nav className="fixed top-0 left-0 w-full z-50 glassmorphism transition-shadow duration-300">
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 w-full z-50 glass">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <span className="font-bold text-2xl text-white tracking-wider">Ian Manfredi</span>
-          <ul className="hidden md:flex items-center space-x-8">
+          <a href="#hero" className="text-lg font-semibold tracking-tight text-foreground">
+            IM<span className="text-primary">.</span>
+          </a>
+
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={`nav-link text-sm font-medium transition-colors ${activeSection === link.href.slice(1) ? "text-foreground" : ""
+                    }`}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
             <li>
-              <a href="#sobre-mi" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Sobre Mi</a>
-            </li>
-            <li>
-              <a href="#educacion" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Educacion</a>
-            </li>
-            <li>
-              <a href="#certificaciones" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Certificaciones</a>
-            </li>
-            <li>
-              <a href="#proyectos" className="text-gray-200 hover:text-white font-medium transition-colors duration-200 gradient-link-underline">Proyectos</a>
-            </li>
-            <li>
-              <a href="#contacto" className="hidden lg:block">
-                <Button className="gradient-cta-button text-white rounded-full px-6 py-3 font-semibold">
-                  Contacto
-                </Button>
+              <a
+                href="#contact"
+                className="btn-primary px-5 py-2.5 rounded-full text-sm inline-flex items-center gap-2"
+              >
+                Contact
+                <ArrowUpRight className="w-4 h-4" />
               </a>
             </li>
           </ul>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden glass border-t border-border">
+            <ul className="px-6 py-4 space-y-4">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="block text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="#contact"
+                  className="btn-primary px-5 py-2.5 rounded-full text-sm inline-flex items-center gap-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
       </nav>
 
-      <div className="pt-20 min-h-screen bg-[#1A1A2E] text-white font-sans scroll-smooth">
-        <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-[#1A1A2E]" id="hero">
-          <div className={`text-center max-w-4xl mx-auto ${isVisible ? "fade-in-up" : "opacity-0"}`}>
-            <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6 tracking-tight gradient-text">
-              Ian Manfredi
-            </h1>
-            <h2 className="text-2xl md:text-3xl mb-6 font-semibold text-gray-200">Full Stack Developer</h2>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed text-gray-400">
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Button
-                size="lg"
-                className="hover-button bg-gray-800 hover:bg-gray-700 text-white rounded-full px-8 py-3 text-lg font-semibold"
-                asChild
-              >
-                <a href="https://github.com/ianmanfredi" target="_blank" rel="noopener noreferrer">
-                  <Github className="w-5 h-5 mr-2" />
-                  GitHub
-                </a>
-              </Button>
-              <Button
-                size="lg"
-                className="hover-button bg-gray-800 hover:bg-gray-700 text-white rounded-full px-8 py-3 text-lg font-semibold"
-                asChild
-              >
-                <a href="https://linkedin.com/in/ianmanfredi" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="w-5 h-5 mr-2" />
-                  LinkedIn
-                </a>
-              </Button>
-            </div>
+      {/* Hero Section */}
+      <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div className={`text-center max-w-4xl mx-auto ${isVisible ? "fade-in-up" : "opacity-0"}`}>
+          <div className="mb-6">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+              Full Stack Developer
+            </span>
           </div>
-        </section>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-12 text-balance">
+            Ian <span className="text-gradient">Manfredi</span>
+          </h1>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="https://github.com/ianmanfredi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
+            >
+              <Github className="w-5 h-5" />
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com/in/ianmanfredi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
+            >
+              <Linkedin className="w-5 h-5" />
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </section>
 
-        <section className="py-20 px-4 bg-diagonal-gradient" id="sobre-mi">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll gradient-text">
-              Sobre Mi & Skills
+      {/* Divider */}
+      <div className="section-divider max-w-4xl mx-auto" />
+
+      {/* About & Skills Section - Bento Grid */}
+      <section id="about" className="py-24 md:py-32 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16 animate-on-scroll">
+            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
+              Get to Know Me
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-balance">
+              About Me & Skills
             </h2>
-            <div className="portfolio-card glassmorphism animate-on-scroll p-6 md:p-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          </div>
+
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {/* About Card - Large */}
+            <div className="bento-item p-8 md:col-span-2 lg:col-span-2 animate-on-scroll stagger-1">
+              <div className="h-full flex flex-col justify-between">
                 <div>
-                  <div className="text-lg md:text-xl leading-relaxed text-gray-300 space-y-6">
-                    <p>
-                      Soy un programador Full Stack con experiencia en JavaScript y Python. Me dedico al desarrollo web y conozco bases de datos, tanto SQL como NoSQL.
-                    </p>
-                    <p>
-                      Siempre busco aprender y aplicar nuevas tecnologias para resolver problemas, asi que me mantengo estudiando para estar al dia.
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-6">Habilidades Tecnicas</h3>
-                  <div className="space-y-8">
-                    <div>
-                      <h4 className="text-xl font-semibold text-gray-200 mb-4">Lenguajes y Tecnologias Web</h4>
-                      <div className="flex flex-wrap gap-3">
-                        {skills.lenguajesYWeb.map((skill) => (
-                          <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold text-gray-200 mb-4">Frameworks y Librerias</h4>
-                      <div className="flex flex-wrap gap-3">
-                        {skills.frameworksYLibrerias.map((skill) => (
-                          <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold text-gray-200 mb-4">Bases de Datos</h4>
-                      <div className="flex flex-wrap gap-3">
-                        {skills.basesDeDatos.map((skill) => (
-                          <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold text-gray-200 mb-4">Herramientas y Plataformas</h4>
-                      <div className="flex flex-wrap gap-3">
-                        {skills.herramientasYPlataformas.map((skill) => (
-                          <span key={skill} className="skill-pill text-white px-5 py-2 rounded-full text-base font-medium">
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
+                    Bio
+                  </span>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    I am a Full Stack Developer with experience in JavaScript and Python. I specialize in web development and possess strong knowledge of both SQL and NoSQL databases. I am constantly learning and applying new technologies to solve complex problems, keeping my stack modern and up-to-date.
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section className="py-20 px-4" id="educacion">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-center mb-16 animate-on-scroll gradient-text">
-              Educacion
+            {/* Core Languages Card */}
+            <div className="bento-item p-6 animate-on-scroll stagger-2">
+              <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
+                Core Languages
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {skills.coreLanguages.map((skill) => (
+                  <span key={skill} className="skill-tag">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Frameworks Card */}
+            <div className="bento-item p-6 lg:col-span-2 animate-on-scroll stagger-3">
+              <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
+                Frameworks & Libraries
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {skills.frameworksLibraries.map((skill) => (
+                  <span key={skill} className="skill-tag">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Data Management Card */}
+            <div className="bento-item p-6 animate-on-scroll stagger-4">
+              <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
+                Data Management
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {skills.dataManagement.map((skill) => (
+                  <span key={skill} className="skill-tag">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Tools Card - Full Width */}
+            <div className="bento-item p-6 md:col-span-2 lg:col-span-3 animate-on-scroll">
+              <span className="text-primary text-xs font-medium tracking-wider uppercase mb-4 block">
+                Tools & Platforms
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {skills.toolsPlatforms.map((skill) => (
+                  <span key={skill} className="skill-tag">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="section-divider max-w-4xl mx-auto" />
+
+      {/* Education Section */}
+      <section id="experience" className="py-24 md:py-32 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16 animate-on-scroll">
+            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
+              Background
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+              Academic Journey
             </h2>
-            <Card className="portfolio-card glassmorphism animate-on-scroll">
-              <CardHeader>
-                <div className="text-center">
-                  <CardTitle className="text-2xl text-white mb-2">Tecnico Superior en Programacion</CardTitle>
-                  <CardDescription className="text-xl text-gray-300">
-                    UTN Bahia Blanca | Carrera orientada a desarrollo web
-                  </CardDescription>
+          </div>
+
+          <div className="gradient-border p-8 md:p-12 animate-on-scroll">
+            <div className="flex flex-col gap-4">
+              <div>
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-2">
+                  Higher Technician in Programming
+                </h3>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  Web development oriented degree
+                </p>
+              </div>
+              <div className="pt-4 border-t border-border">
+                <p className="font-medium text-foreground">UTN Bahia Blanca</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="section-divider max-w-4xl mx-auto" />
+
+      {/* Certifications Section */}
+      <section id="certifications" className="py-24 md:py-32 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16 animate-on-scroll">
+            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
+              Credentials
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+              Credentials & Certifications
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {certifications.map((cert, index) => (
+              <div
+                key={cert.name}
+                className={`cert-card animate-on-scroll stagger-${index + 1}`}
+              >
+                <div className="aspect-video overflow-hidden">
+                  <img
+                    src={cert.image}
+                    alt={cert.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              </CardHeader>
-            </Card>
+                <div className="p-5">
+                  <h3 className="font-semibold text-foreground">{cert.name}</h3>
+                </div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-20 px-4 bg-[#181B20]" id="certificaciones">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-16 animate-on-scroll gradient-text">
-              Certificaciones
+      {/* Divider */}
+      <div className="section-divider max-w-4xl mx-auto" />
+
+      {/* Projects Section */}
+      <section id="projects" className="py-24 md:py-32 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16 animate-on-scroll">
+            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
+              Portfolio
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+              Featured Projects
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {certifications.map((cert, index) => (
-                <Card
-                  key={cert.name}
-                  className="portfolio-card glassmorphism animate-on-scroll"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <CardContent className="pt-8 pb-8 flex flex-col items-center">
-                    <div className="w-full aspect-video bg-gray-900 rounded-xl overflow-hidden flex items-center justify-center border-2 border-blue-600 shadow-lg mb-6">
-                      <img
-                        src={cert.image}
-                        alt={cert.name}
-                        className="object-cover w-full h-full"
-                        style={{ maxHeight: '220px' }}
-                      />
-                    </div>
-                    <p className="text-xl font-bold text-white mt-2">{cert.name}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
           </div>
-        </section>
 
-        <section className="py-20 px-4" id="proyectos">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-center mb-16 animate-on-scroll gradient-text">
-              Proyectos
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`project-card animate-on-scroll stagger-${index + 1}`}
+              >
+                <div className="p-8">
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="text-primary text-xs font-medium tracking-wider uppercase">
+                      Project {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                      aria-label={`View ${project.title}`}
+                    >
+                      <ArrowUpRight className="w-5 h-5" />
+                    </a>
+                  </div>
+                  <h3 className="text-2xl font-semibold text-foreground mb-3">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-ghost px-5 py-2.5 rounded-full text-sm font-medium inline-flex items-center gap-2"
+                  >
+                    View Project
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="section-divider max-w-4xl mx-auto" />
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 md:py-32 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="animate-on-scroll">
+            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4 block">
+              Get in Touch
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+              Contact
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {projects.map((project, index) => (
-                <Card
-                  key={project.id}
-                  className="portfolio-card glassmorphism animate-on-scroll"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <CardHeader>
-                    <CardTitle className="text-xl text-white">{project.title}</CardTitle>
-                    <CardDescription className="text-gray-300">{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    {project.github ? (
-                      <Button className="hover-button bg-gray-200 text-gray-800 hover:bg-gray-300 rounded-full" asChild>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github className="w-4 h-4 mr-2" />
-                          {project.title === "WikiDev" ? "Ver Proyecto" : "Ver Proyecto"}
-                        </a>
-                      </Button>
-                    ) : (
-                      <span className="inline-block px-4 py-2 bg-gray-700 text-gray-300 rounded-full text-sm">En proceso</span>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <p className="text-lg text-muted-foreground mb-12 max-w-xl mx-auto leading-relaxed">
+              Interested in working together? Let&apos;s connect.
+            </p>
           </div>
-        </section>
 
-        <section className="py-20 px-4" id="contacto">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-8 animate-on-scroll gradient-text">Contacto</h2>
-            <p className="text-lg mb-12 text-gray-300 animate-on-scroll">¿Interesado en trabajar juntos? ¡Contactame!</p>
-            <div className="flex flex-wrap justify-center gap-6 animate-on-scroll">
-              <Button
-                size="lg"
-                className="hover-button bg-gray-800 hover:bg-gray-700 text-white rounded-full px-8 py-3 text-lg font-semibold"
-                asChild
-              >
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ian.manfredi12@gmail.com" target="_blank" rel="noopener noreferrer">
-                  <Mail className="w-5 h-5 mr-2" />
-                  Enviar Email
-                </a>
-              </Button>
-              <Button
-                size="lg"
-                className="hover-button bg-gray-800 hover:bg-gray-700 text-white rounded-full px-8 py-3 text-lg font-semibold"
-                asChild
-              >
-                <a href="https://linkedin.com/in/ianmanfredi" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="w-5 h-5 mr-2" />
-                  LinkedIn
-                </a>
-              </Button>
-              <Button
-                size="lg"
-                className="hover-button bg-gray-800 hover:bg-gray-700 text-white rounded-full px-8 py-3 text-lg font-semibold"
-                asChild
-              >
-                <a href="https://github.com/ianmanfredi" target="_blank" rel="noopener noreferrer">
-                  <Github className="w-5 h-5 mr-2" />
-                  GitHub
-                </a>
-              </Button>
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 animate-on-scroll">
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=ian.manfredi12@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
+            >
+              <Mail className="w-5 h-5" />
+              Send Email
+            </a>
+            <a
+              href="https://linkedin.com/in/ianmanfredi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
+            >
+              <Linkedin className="w-5 h-5" />
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/ianmanfredi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost px-6 py-3 rounded-full text-sm font-medium inline-flex items-center gap-2"
+            >
+              <Github className="w-5 h-5" />
+              GitHub
+            </a>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <footer className="py-8 px-4 border-t border-gray-800">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-gray-400">© 2025 Ian Manfredi</p>
+      {/* Footer */}
+      <footer className="py-8 px-6 border-t border-border">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            © 2026 Ian Manfredi
+          </p>
+          <div className="flex items-center gap-6">
+            <a
+              href="https://github.com/ianmanfredi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="w-5 h-5" />
+            </a>
+            <a
+              href="https://linkedin.com/in/ianmanfredi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-5 h-5" />
+            </a>
+            <a
+              href="mailto:ian.manfredi12@gmail.com"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Email"
+            >
+              <Mail className="w-5 h-5" />
+            </a>
           </div>
-        </footer>
-      </div>
-    </>
+        </div>
+      </footer>
+    </div>
   )
 }
